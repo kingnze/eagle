@@ -1,0 +1,36 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <head>
+        <meta charset="utf-8">
+        <link  href="{% static 'images/kingnzelogo.jpg' %}" rel="shortcut icon" type="img/x-icon"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css' />
+        <link href="{% static 'fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fonts.googleapis.com/css?family=Nunito:400,700&display=swap' %}" rel="stylesheet">
+            <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+   
+
+
+    </head>
+    
+    <title>
+        {% block title %}
+          
+        {% endblock title %}
+    </title>
+  </head>
+  <body>
+    {% include 'nav.html' %}
+    
+    {% block content %}
+
+    {% endblock content %}
+
+    {% include 'footer.html' %}
+    
+  </body>
+</html>

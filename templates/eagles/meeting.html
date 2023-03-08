@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Meetings & Events
+{% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="kinging-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+              <br><br>
+                <div class="w3breadcrumb-left text-left">
+                    <h2 class="inner-w3-title mt-lg-5 mt-4">
+                        Meetings & Events </h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <!-- <li class="active"><span class="fas fa-arrow-right mx-2"></span>Meetings & Events</li> -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<section >
+    <br><br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h6 style="color: rgb(90, 86, 86); text-align: center;">ELEGANT CONFERENCING FACILITIES</h6>
+          <br>
+        <h5 style="font-size: 3rem; font-family: geneva; font-weight: 700; text-align: center;">Meetings & Events</h5>
+        <br>
+        <p style="text-align: center;">
+          Eagles Suite Meeting and Conferences strive to capture a genuine sense of place and shared experience in order to inspire truly engaging meetings that ensure delegates achieve their results. We offer six dedicated meeting and function rooms available in different layout types, all on the third and fourth floor, designed to suit various seating configurations. All our venues are equipped with the latest audio-visual and technical equipment to ensure the best possible impact for your meeting or event.
+        </p>
+        <br>
+        <br>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section >
+    <div class="container">
+      <div class="row">
+        {% if meeting %}
+        {% for item in meeting %}
+        <div class="col-md-4">
+          <div class="card" >
+            <div class="inner">
+              <a href="{{item.meetimg.url}}" data-lightbox="meeting"> 
+                <img src="{{item.meetimg.url}}" class="card-img-top" alt="">
+              </a>
+            </div>
+          </div>
+          <h5 class="py-3 text-center" style="font-size: 3rem; font-family: geneva; font-weight: 500; ">{{item.title}}</h5>
+          <br>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+  </section>
+  <section >
+    <br><br>
+    <div class="container">
+      <div class="row" >
+        <div class="col-md-12" style="text-align: center;">
+          <h5 style="font-size: 3rem; font-family: geneva; font-weight: 500; ">Meetings & Events Protocols</h5>
+          <ul style="font-size: 2rem; font-family: geneva;" >
+            <li>• Meetings & events are hosted at a 50% seating capacity</li>
+            <li>• All seating arrangements are spaced 2 meters apart</li>
+            <li>• Meeting rooms are equipped with sanitizer dispensers</li>
+            <li>• Temperature checks is carried out at the entrance</li>
+            <li>• Meeting rooms are disinfected before and after events</li>
+            <li>• Writing materials & stationaries are covered in paper bags</li>
+            <li>• All electronic media equipment such as microphone / pointer / projector are sanitized after usage</li>
+            <li>• Individually packed meal options are available</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br><br><br>
+  </section>
+{% endblock content %}

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+{{ room.title}}
+{% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="kinging-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <div class="w3breadcrumb-left text-left">
+                    <br><br>
+                    <h2 class="inner-w3-title mt-lg-5 mt-4">
+                        {{ room.title}} </h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'rooms' %}">Rooms</a></li>
+                        <!-- <li class="active"><span class="fas fa-arrow-right mx-2"></span>Room</li> -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+<section id="room" class="py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            {% if room %}
+         <div class="col-md-6">
+            <a style="height: 12px!important;" class="image-zoom" href="{{room.roomimg.url}}" data-gal="prettyPhoto[gallery]">
+                <div class="content-overlay"></div>
+                <img style=" border-radius: 5px;" src="{{room.roomimg.url}}" class="img-fluid w3layouts agileits" alt="portfolio-img">
+            </a>
+
+                <div class="row md-5 thumbs">
+                    {% if room.roomimg1 %}
+                    <div class="col-md-4 col-4 py-3">
+                        <a class="image-zoom" href="{{room.roomimg1.url}}" data-gal="prettyPhoto[gallery]">
+                            <div class="content-overlay"></div>
+                            <img style=" border-radius: 5px;" src="{{room.roomimg1.url}}" class="img-fluid w3layouts agileits" alt="portfolio-img">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if room.roomtmg2 %}
+                    <div class="col-md-4 col-4 py-3">
+                        <a class="image-zoom" href="{{room.roomtmg2.url}}" data-gal="prettyPhoto[gallery]">
+                            <div class="content-overlay"></div>
+                            <img style=" border-radius: 5px;" src="{{room.roomtmg2.url}}" class="img-fluid w3layouts agileits" alt="portfolio-img">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if room.roomtmg3 %}
+                    <div class="col-md-4 col-4 py-3">
+                        <a class="image-zoom" href="{{room.roomtmg3.url}}" data-gal="prettyPhoto[gallery]">
+                            <div class="content-overlay"></div>
+                            <img style=" border-radius: 5px;" src="{{room.roomtmg3.url}}" class="img-fluid w3layouts agileits" alt="portfolio-img">
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>   
+            </div>
+            <div class="col-md-5">
+              <div class="col-md-12 mb-5">
+                  <div class="py-3">
+                    <h4 style="font-size: 2.5rem;">{{room.title}}  {{ room.price | intcomma }}</h4>
+                  </div>
+                  <h4>Description:</h4>
+                  <p class="py-3 " style="font-size: 16px; margin-top: -1rem;"  >{{ room.description}}</p>
+                  <ul style="font-size: 14px; background-color: var(--bg-color);"  class="list-group list-group-flush mb-4">
+                    <li style=" background-color: var(--bg-color); color: var(--heading-color);" class="list-group-item ">
+                        <i class="fa fa-user" style="color: var(--heading-color); font-size: large;"></i> Price:
+                        <span class="float-right" >{{ room.price | intcomma }}</span>
+                    </li>
+                    <li style=" background-color: var(--bg-color); color: var(--heading-color);" class="list-group-item ">
+                        <i class="fa fa-users" style="color: var(--heading-color); font-size: large;" ></i> Guests:
+                        <span class="float-right">{{ room.guests}}</span>
+                    </li>
+                    <li style=" background-color: var(--bg-color); color: var(--heading-color);" class="list-group-item ">
+                        <i class="fa fa-bed" style="color: var(--heading-color); font-size: large;  "></i> Bed:
+                        <span class="float-right">{{ room.bed}}</span>
+                    </li>
+                    <li style=" background-color: var(--bg-color); color: var(--heading-color);" class="list-group-item ">
+                        <i class="fa fa-car" style="color: var(--heading-color); font-size: large;"></i> Car Rental:
+                        <span class="float-right">{{ room.car_rent}}</span>
+                    </li>                                       
+                </ul>
+                <ul class="header-search me-lg-4">
+                    <li class="nav-item search-right">
+                        <!-- <button type="submit" class="btn btn-primary btn-style w-60" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button> -->
+                        <a href="{% url 'bookings' %}" class="btn search-btn btn-primary" title="search"><span aria-hidden="true"></span> Book Now</a>
+                        <!-- <a href="#search" class="btn search-btn btn-primary" title="search"><span aria-hidden="true"></span> Book Now</a> -->
+                    </li>                                       
+                </ul>        
+                        {% endif %}
+        </div>
+    </div>
+  </section>
+  <br><br>
+{% endblock content %}

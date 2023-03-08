@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Fitness & Spa
+{% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="kinging-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <div class="w3breadcrumb-left text-left">
+                    <h2 class="inner-w3-title mt-lg-5 mt-4">
+                        Fitness & Spa </h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<section>
+    <br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h6 style=" text-align: center;">WHOLISTIC APPROACH TO HEALTH & WELLNESS</h6>
+          <br>
+        <h5 style="font-size: 3rem; font-family: geneva; font-weight: 700; text-align: center;">Fitness & Spa</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container"  style="margin-top: 2rem;">
+      <div class="row">
+        {% if spa %}
+        {% for item in spa %}
+        <div class="col-md-6">
+          <div class="card" >
+            <div class="inner">
+              <span class="image-block">
+                <a class="image-zoom" href="{{item.spaimg.url}}" data-gal="prettyPhoto[gallery]">
+                    <div class="content-overlay"></div>
+                    <img src="{{item.spaimg.url}}" class="img-fluid w3layouts agileits" alt="portfolio-img">
+                </a>
+            </span>
+            </div>
+          </div>
+          <p class="card-text">
+            <h4 class="card-title text-center mt-3" style="font-size: 30px; font-family: geneva;">{{item.title}}</h4>
+          </p>
+          <br>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+  </section>
+  <section >
+    <br><br><br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h6 style=" text-align: center;">SPECIAL RELAXATION SESSIONS</h6>
+          <br>
+        <h5 style="font-size: 3rem; font-family: geneva; font-weight: 700; text-align: center;">Let's Pamper You</h5>
+        <br>
+        <br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            At the Eagles Suite Spa, your beauty and wellness is our source of inspiration, and our commitment is to provide relaxation & stress relief as well as the finest treatments and pampering for the face and body.
+          </p>
+<br>
+        </div>
+        
+        <div class="col-md-6">
+          <p>
+            We offer an extensive array of Spa services to make your Spa experience complete and with our range of carefully selected products, we will work to ensure your face and skin reflect the best of you everywhere you go.
+          </p>
+        </div>
+      </div>
+    </div>
+    <br><br><br>
+  </section>
+{% endblock content %}

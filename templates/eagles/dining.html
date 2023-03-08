@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Dining And Bar
+{% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="kinging-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <br><br>
+                <div class="w3breadcrumb-left text-left">
+                    <h2 class="inner-w3-title mt-lg-5 mt-4">Dining & Bar</h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            {% if dining %}
+            {% for item in dining %}
+               <div class="col-lg-6">
+                    <div style="background-color: var(--bg-color);" class="card">
+                        <div class="inner">
+                            <span class="image-block">
+
+                                <a class="image-zoom" href="{{item.diningimg.url}}" data-gal="prettyPhoto[gallery]">
+                                    <div class="content-overlay"></div>
+                                    <img src="{{item.diningimg.url}}" class="img-fluid w3layouts agileits" alt="portfolio-img">
+                                </a>
+                            </span>
+                        </div>
+                        <div class="card-body" >
+                        <h4 style="font-size: 30px; font-family: geneva;" class="card-title" >{{ item.title}}</h4>
+                        <p >{{ item.body}}</p>
+                        <h5 style="font-size: 20px; font-family: geneva; margin-bottom: 1rem;" >{{ item.subtitle}}</h5>
+                        <ul style="font-size: 15px; font-family: geneva;">
+                            <li>{{ item.text_1}}</li>
+                            <li>{{ item.text_2}}</li>
+                            <li>{{ item.text_3}}</li>
+                            <li>{{ item.text_4}}</li>
+                            <li>{{ item.text_5}}</li>
+                        </ul>
+                        </div>
+                    </div>
+                 <br>
+                </div>
+            {% endfor %}
+            {% endif %}
+               
+        </div>
+    </div>
+</section>
+{% endblock content %}

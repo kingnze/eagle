@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Our Article
+{% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="kinging-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <div class="w3breadcrumb-left text-left">
+                    <br><br>
+                    <h2 class="inner-w3-title mt-lg-5 mt-4">
+                        Our Article </h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<section class="kinging-blog">
+    <div class="blog py-5" id="Newsblog">
+        <div class="container py-lg-5 py-md-4 py-2">
+            <div class="title-content text-center mb-lg-3 mb-4">
+                <h6 class="title-subw3hny mb-1">Our Article</h6>
+                <h3 class="title-kinging mb-5">Our Recent News</h3>
+            </div>
+
+            <div class="row justify-content-center">
+                {% if blog %}
+                {% for item in blog %}
+                <div class="col-lg-4 col-md-6 item">
+                    <div class="card" >
+                        <div  class="card-header p-0 position-relative">
+                            <a  href="{% url 'blogdetail' item.slug %}" class="zoom d-block">
+                                <img style="height: 22rem; border-top: 4px solid var(--primary-color);"  class="card-img-bottom d-block" src="{{item.leadimg.url}}" alt="Card image cap">
+                            </a>
+
+                        </div>
+                        <div class="card-body blog-details">
+                            
+                            <a style="font-size: 1.6rem;  font-weight: 700;" href="{% url 'blogdetail' item.slug %}" class="blog-desc">{{ item.title | truncatechars:50 | safe }}</a>
+                            <div class="author align-items-center">
+                                    <h5><span><i class="far fa-clock"></i> {{ item.date_posted }}</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                {% endfor %}                  
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-5 mb-5">
+                  {% if blog.has_other_pages %}
+                    <ul class="pagination">
+                      {% if blog.has_previous %}
+                          <li class="page-item">
+                            <a href="?page={{blog.previous_page_number}}" class="page-link">&laquo;
+                            </a>
+                          </li>
+                          {% else %}
+                          <!-- <li class="page-link disabled">
+                            <a class="page-link">&laquo;</a>
+                          </li> -->
+                      {% endif %}
+                      {% for i in blog.paginator.page_range %}
+                        {% if blog.number == i %}
+                          <li class="page-item active">
+                            <a class="page-link">{{i}}</a>
+                          </li>
+                       {% else %}
+                       <li class="page-item">
+                         <a href="?page={{i}}" class="page-link">{{i}}</a>
+                       </li>
+                     {% endif %}
+                    {% endfor %} 
+                    {% if blog.has_next %}
+                        <li class="page-item">
+                          <a href="?page={{blog.next_page_number}}" class="page-link">&raquo;
+                          </a>
+                        </li>
+                      {% else %}
+                        <!-- <li class="page-link disabled">
+                          <a class="page-link">&raquo;</a>
+                        </li> -->
+                    {% endif %}
+                  </ul>                   
+                    {% endif %}
+                </div>
+            </div> 
+        </div>
+    </div>
+</section>
+{% endblock content %}

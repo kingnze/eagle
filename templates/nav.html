@@ -1,0 +1,137 @@
+<header id="site-header" class="fixed-top">
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light stroke  py-lg-0">
+            <h1><a class="navbar-brand " href="{% url 'index' %}">
+                    <span class="w3yellow">Eagle</span> Suite
+                </a></h1>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav mx-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                    <li
+                    {% if '/' == request.path %}
+                    class="nav-item active"
+                    {% else %}
+                    class="nav-item "
+                    {% endif %}>
+                        <a class="nav-link " aria-current="page" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li 
+                    {% if 'rooms' in request.path %}
+                    class="nav-item  active"
+                    {% else %}
+                    class="nav-item "
+                      
+                    {% endif %}
+                    >
+                        <a class="nav-link" href="{% url 'rooms' %}">Rooms</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Explore
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#"></a>
+                            <a style="font-size: 13px;"  class="dropdown-item" href="{% url 'service' %}">Services</a>
+                            <div class="dropdown-divider"></div>
+                            <a style="font-size: 13px;"  class="dropdown-item" href="{% url 'dining' %}">Dining </a>
+                            <div class="dropdown-divider"></div>
+                            <a style="font-size: 13px;"  class="dropdown-item" href="{% url 'meeting' %}">Meeting </a>
+                            <div class="dropdown-divider"></div>
+                            <a style="font-size: 13px;"  class="dropdown-item" href="{% url 'spa' %}">Spa </a>
+                            <div class="dropdown-divider"></div>
+                            <a style="font-size: 13px;"  class="dropdown-item" href="{% url 'gallery' %}">Gallery </a>
+                          
+    
+                        </div>
+                    </li>
+                    
+                    <li 
+                    {% if 'blog' in request.path %}
+                    class="nav-item active"
+                    {% else %}
+                    class="nav-item "
+                      
+                    {% endif %}
+                    >
+                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                    </li>
+                    <li 
+                    {% if 'about' in request.path %}
+                    class="nav-item active"
+                    {% else %}
+                    class="nav-item "
+                      
+                    {% endif %}
+                    >
+                        <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                    </li>
+
+                    <li 
+                    {% if 'contact' in request.path %}
+                    class="nav-item active"
+                    {% else %}
+                    class="nav-item "
+                      
+                    {% endif %}
+                    >
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <!-- <li 
+                    {% if 'dashboard' in request.path %}
+                    class="nav-item active"
+                    {% else %}
+                    class="nav-item "
+                      
+                    {% endif %}
+                    >
+                   <a class="nav-link" href="
+                   " ><i class="fas fa-user-shield"></i>  {{ user.username }}</a>
+                 </li> -->
+                 <li class="nav-item mr-3">
+                    <a href="javascript:{document.getElementById('logout').submit()}"
+                    class="nav-link">
+                    <i class="fa fa-sign-out"></i> Logout
+                   </a>
+                   <form action="{% url 'logout' %}" method="POST" id="logout">
+                     {% csrf_token %}
+                     <input type="hidden">
+                   </form>
+                  </li>
+                 {% else %}
+                 <li 
+                    {% if 'Login' in request.path %}
+                    class="nav-item active"
+                    {% else %}
+                    class="nav-item "
+                      
+                    {% endif %}
+                    >
+                   <a class="nav-link" href="{% url 'login' %}" ><i class="fas fa-user-shield"></i> Login</a> 
+                 </li>
+                 {% endif %}
+                </ul>
+             
+            </div>
+            <div class="mobile-position">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+    </div>
+</header>
+

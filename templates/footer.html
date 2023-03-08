@@ -1,0 +1,224 @@
+{% load static %}
+
+<section class="kinging-newsletter">
+    <div class="container">
+        <div class="uphny-kinging-newsletter-inf">
+            <div class="row uphny-kinging-newsletter align-items-center">
+                <div class="col-lg-6 kinging-newsletter-left text-left">
+                    <h3 class="titlehny">Don't miss our future updates! Get subscribed today!</h3>
+                </div>
+                <div class="col-lg-6 kinging-newsletter-form ps-lg-5 mt-lg-0 mt-md-5 mt-4">
+                    <form action="#" method="post" class="subscribe-wthree">
+                        <div class="flex-wrap subscribe-wthree-field">
+                            <input class="form-control" type="email" placeholder="Type Your Email Address" name="email" required="">
+                            <button class="btn btn-style btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+   <footer class="kinging-footer">
+    <div class="kinging-footer-16 py-5">
+        <div class="container py-md-5 py-3 pb-0">
+            <div class="row footer-p right-side">
+                <div class="col-lg-4 col-md-6 pe-lg-5">
+                    <h2 class="footerw3l-logo"><a href="{% url 'index' %}">
+                            <span class="w3yellow">Eagle</span> Suite
+                        </a></h2>
+                    <p class="mt-3">Lorem ipsum dolor sit, amet consectetur elit. Earum mollitia ipsam autem ipsam.dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.</p>
+                    <div class="columns-2 mt-lg-5 mt-4">
+                        <ul class="social">
+                            <li><a href="#facebook"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li><a href="#linkedin"><i class="fab fa-linkedin-in"></i></a>
+                            </li>
+                            <li><a href="#twitter"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#google"><i class="fab fa-google-plus-g"></i></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
+                    <div class="row">
+                        <div class="col-xl-5 col-6 column">
+                            <h3>Links</h3>
+                            <ul class="footer-gd-16">
+                                <li><a href="{% url 'about' %}">About Us</a></li>
+                                <li><a href="{% url 'service' %}">Services</a></li>
+                                <li><a href="{% url 'rooms' %}">Rooms</a></li>
+                                <li><a href="{% url 'blog' %}">Blog Posts</a></li>
+                                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 column">
+                            <h3>Services</h3>
+                            <ul class="footer-gd-16">
+                                <li><a href="{% url 'service' %}">Services</a></li>
+                                <li><a href="{% url 'dining' %}">Dining</a></li>
+                                <li><a href="{% url 'meeting' %}">Meeting</a></li>
+                                <li><a href="{% url 'spa' %}">Spa</a></li>
+                                <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 column mt-lg-0 mt-4 pl-xl-0">
+                    <h3>Futured View</h3>
+                    <div class="end-column row">
+                        <div class="col-4 w3indta-grid">
+                            <a href="#insta">
+                                <img src="{% static 'images/ARIYABAR.jpg' %}" class="img-fluid radius-image" alt="poultryfield">
+                            </a>
+                        </div>
+                        <div class="col-4 w3indta-grid">
+                            <a href="#insta">
+                                <img src="{% static 'images/room1.jpg' %}" class="img-fluid radius-image" alt="poultryfield">
+                            </a>
+                        </div>
+                        <div class="col-4 w3indta-grid">
+                            <a href="#insta">
+                                <img src="{% static 'images/about1.jpg' %}" class="img-fluid radius-image" alt="poultryfield">
+                            </a>
+                        </div>
+                        <div class="col-4 w3indta-grid mt-4">
+                            <a href="#insta">
+                                <img src="{% static 'images/about2.jpg' %}" class="img-fluid radius-image" alt="poultryfield">
+                            </a>
+                        </div>
+                        <div class="col-4 w3indta-grid mt-4">
+                            <a href="#insta">
+                                <img src="{% static 'images/about3.jpg' %}" class="img-fluid radius-image" alt="poultryfield">
+                            </a>
+                        </div>
+                        <div class="col-4 w3indta-grid mt-4">
+                            <a href="#insta">
+                                <img src="{% static 'images/gallery.jpg' %}" class="img-fluid radius-image" alt="poultryfield">
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="below-section text-center pt-lg-4 mt-5">
+                <p style="font-size: 12px;" class="copy-text">&copy; 2023 Eagle Suite. All rights reserved | Developed by Kingnze</p>
+                <!-- <ul class="footer-gd-16 d-flex justify-content-center">
+                    <li><a href="#terms">Terms
+                        </a></li>
+                    <li class="mx-2">/
+                    </li>
+                    <li><a href="#policy">Privacy Policy</a></li>
+                </ul> -->
+            </div>
+        </div>
+    </div>
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+    <span class="fas fa-arrow-up" aria-hidden="true"></span>
+</button>
+<script>
+    window.onscroll = function () {
+      scrollFunction()
+    };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("movetop").style.display = "block";
+      } else {
+        document.getElementById("movetop").style.display = "none";
+      }
+    }
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
+</footer>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script>
+    $(document).ready(function () {
+      $('.popup-with-zoom-anim').magnificPopup({
+        type: 'inline',
+  
+        fixedContentPos: false,
+        fixedBgPos: true,
+  
+        overflowY: 'auto',
+  
+        closeBtnInside: true,
+        preloader: false,
+  
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-zoom-in'
+      });
+  
+      $('.popup-with-move-anim').magnificPopup({
+        type: 'inline',
+  
+        fixedContentPos: false,
+        fixedBgPos: true,
+  
+        overflowY: 'auto',
+  
+        closeBtnInside: true,
+        preloader: false,
+  
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-slide-bottom'
+      });
+    });
+  </script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/theme-change.js' %}"></script>
+<script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+
+</script>
+<script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+
+    $('.dropdown').click(function(){
+
+    $('.dropdown-menu').toggleClass('show');
+
+    });
+</script>
+
+<script src="{% static 'js/jquery-1.7.2.js' %}"></script>
+<script src="{% static 'js/jquery.quicksand.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>

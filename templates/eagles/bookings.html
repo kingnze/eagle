@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Booking
+{% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="w3l-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <div class="w3breadcrumb-left text-left">
+                    <br><br>
+                    <h2 class="inner-w3-title mt-lg-5 mt-4">
+                        Booking </h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <div  class="row inner-sec">
+            <div style="width: 54rem; margin-bottom: 2rem; margin-top: 3rem; " class="login p-5 bg-light mx-auto mw-100">
+                <h5 style="font-size: 3rem; font-family: geneva; font-weight: 700; text-align: center;">Book A Room Today</h5>
+                {% if messages %}
+                {% for item in messages %}
+                <p class="alert alert-success"> {{item}} </p>
+                {% endfor %}
+                {% endif %}
+                <form action="{% url 'bookings' %}" method="POST" class="search-box  position-relative">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                        <input type="hidden" name="user_id" value="{{ user.id }}"> 
+                    {% else %}
+                        <input type="hidden" name="user_id" value="0">
+                    {% endif %}
+                    <br>
+                    <div class="form-row" style="justify-content: center;">
+                    <div class="col-md-6 mb-3">
+                            <label  for="checkin">Check In</label>
+                            <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px;  border-radius: 5px; font-size: 17px;" type="date" name="check_in" class="form-control" placeholder="Check In" required>
+                        </div>
+                        <div  class="col-md-6 mb-3">
+                        <label  for="checkout">Check Out</label>
+                        <input style="background-color: var(--bg-color); color: var(--heading-color);  height: 50px;  border-radius: 5px; font-size: 17px;" type="date" name="check_out" class="form-control" placeholder="Check In" required>
+                        </div>
+                    </div>
+                  
+                    <div class="form-row" style="justify-content: center;">
+                    <div class="col-md-6 mb-3 ">
+                        <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px;  border-radius: 5px; font-size: 17px;" type="number" name="adults" class="form-control"  value="" placeholder="Adults" required>
+                    </div>
+                    <div class="col-md-6 mb-3 ">
+                        <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px;  border-radius: 5px; font-size: 17px;"  type="number" name="children" class="form-control"  value="" placeholder="children" required>
+                    </div>
+                    </div> 
+                    <div class="form-row" style="justify-content: center;">
+                        <div class="col-md-6 mb-3 ">
+                            <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px; border-radius: 5px; font-size: 17px;" type="text" name="name" placeholder="Name" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3 ">
+                            <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px;  border-radius: 5px; font-size: 17px;"  type="text" name="address" class="form-control"  value="" placeholder="Address" required>
+                        </div>
+                    </div>
+                    <div class="form-row" style="justify-content: center;">
+                        <div  class=" col-md-6 mb-3">
+                            <select class="form-row" style="background-color: var(--bg-color); padding-left: 10px; height: 50px; width: 230px; border: 1px solid #ccc; color: var(--heading-color); border-radius: 5px; font-size: 17px;"  name="gender" aria-placeholder="Gender" required>
+                                <option style="color: var(--heading-color);" selected disabled value=""> Gender</option>
+                                <option style="color: var(--heading-color);" value="female"> Female</option>
+                                <option style="color: var(--heading-color);" value="male"> Male</option>
+                            </select>
+                        </div>
+                        </div>            
+                    <div class="form-row" style="justify-content: center;">
+                        <div  class=" col-md-6 mb-3 col-sm-6 ">
+                            <select  style="background-color: var(--bg-color); color: var(--heading-color); padding-left: 10px; height: 50px; width: 230px; border: 1px solid #ccc; border-radius: 5px; font-size: 17px;"  name="room" aria-placeholder="Room" required>
+                                <option id="sele" style="margin-left: 5px; color: var(--heading-color); " selected disabled value=""> Select a room</option>
+                                <option style="color: var(--heading-color);" name="room"> Twin Club Room</option>
+                                <option style="color: var(--heading-color);"  name="room"> Twin Superior Room</option>
+                                <option style="color: var(--heading-color);"  name="room">Junior Club Suite</option>
+                                <option style="color: var(--heading-color);"  name="room">King Club Room</option>
+                                <option style="color: var(--heading-color);"  name="room">One Bedroom Executive Suite</option>
+                                <option style="color: var(--heading-color);"  name="room">Eagles Suite</option>
+                                <option style="color: var(--heading-color);"  name="room">King Executive Room</option>
+                                <option style="color: var(--heading-color);"  name="room">Ambassador Suite</option>
+                                <option style="color: var(--heading-color);"  name="room">Presidential Suite</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div  class="bottom-btn col-md-6 mb-3 col-sm-6 ">
+                        <button style=" height: 49px; border-radius: 5px; font-size: 17px;" class="btn btn-style btn-primary w-100 px-2">Book</button>
+                    </div>
+                </form>    
+            </div>
+
+           </div>
+    </div>
+</div>
+</section>
+{% endblock content %}

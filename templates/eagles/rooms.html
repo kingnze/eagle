@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Our Room
+{% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="kinging-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <div class="w3breadcrumb-left text-left">
+                    <br><br>
+                    <h2 class="inner-w3-title mt-lg-5 mt-4">Our Rooms</h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <!-- <li class="active"><span class="fas fa-arrow-right mx-2"></span>Rooms</li> -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+<br><br>
+<div class="living_middle">
+    <div class="container">
+            <div class="title-content text-center mb-lg-3 mb-4">
+                <h6 class="title-subw3hny mb-1">Our Rooms</h6>
+                <h3 class="title-kinging mb-5">Our Luxury Rooms</h3>
+            </div>
+        <div class="row">
+            {% if rooms %}
+            {% for item in rooms %}
+            <div style="padding-left: 10px; padding-right: 10px; color: var(--heading-color); " class="col-md-4 wow fadeInLeft "     data-wow-delay="0. 4s">
+                <div class="living_box "><a href="{% url 'room' item.id %}">
+                <img  src="{{item.roomimg.url}}" class="img-responsive " alt=""/>
+                <span class="sale-box">
+                    <span style="font-size: 1.5rem;" class="sale-label">{{ item.price}}</span>
+                    <!-- <span style="font-size: 1.5rem;" class="sale-label">{{ item.is_booked}}</span> -->
+                </span>
+                </a>
+                <div style="border-top: 4px solid #f35b04;" class="living_desc">
+                    <h3 style="color: var(--heading-color);" class="text-center"><a href="{% url 'room' item.id %}">{{ item.title}}</a></h3>
+                    <p style="color: var(--heading-color)!important;"  class="text-center">{{ item.description | truncatechars:35 | safe }}</p>
+                    <img class="text-center" style="margin-bottom: 15px; width: 8rem;     margin-left: 12rem;" src="{% static 'images/star2.png' %}" alt="">
+                </div>
+                <table border="1" class="propertyDetails">
+                <tbody ><tr>
+                    <td style="border: 1px solid; color: var(--heading-color);"><i class="fa fa-users" style="color: var(--heading-color); font-size: large;" ></i> Guests:
+                        <span class="float-right">  {{ item.guests}}</span></td>
+                    <td style="border: 1px solid; color: var(--heading-color);"> <i class="fa fa-bed" style="color: var(--heading-color); font-size: large;"></i> Bed:
+                        <span  class="float-right">  {{ item.bed}}</span></td>
+                    <td style="border: 1px solid; color: var(--heading-color); "><i class="fa fa-car" style="color: var(--heading-color); font-size: large;"></i> Car Rental:<span class="float-right">  {{ item.car_rent}}</span></td></tr>
+                </tbody></table>
+            
+            </div>
+            <br>
+            <br>
+           </div>
+            {% endfor %}
+            {% endif %}
+            
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

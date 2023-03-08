@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Blog
+{% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="kinging-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <div class="w3breadcrumb-left text-left">
+                    <br><br>
+                    <h2 class="inner-w3-title mt-lg-5 mt-4">Blog</h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li class="active"><span class="fas fa-arrow-right mx-2"></span>{{post.title}}</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+<section  class="kinging-mag-main">
+    <br><br>
+	<div  class="mag-content-inf py-5">
+		<div class="container">
+			<div  class="blog-inner-grids py-md-4 row">	
+                {% if post %}
+				<div class="mag-content-left-hny col-lg-7">
+                    {% if post.leadimg %}
+                    <img src="{{post.leadimg.url}}" alt="" class="img-fluid radius-image py-3">
+                    {% endif %}
+                    <h5 ><a href="#">{{post.title}}</a></h5>
+                    <div class="sub-meta mt-3">
+                        <span> <i class="far fa-clock"></i> {{ post.date_posted }} By {{ post.author }}</span>
+                        <p>{{post.body | safe}}</p>	
+                    </div>
+					   
+                     {% endif %}
+					
+			    </div>          
+				<div class="mag-content-right-hny col-lg-4">
+					<aside>
+						<div class="side-bar-hny-recent mb-5">
+							<h4 class="mag-side-title">Our <span>Rooms</span></h4>
+							<div class="mag-small-post dont-miss-grids-inf">
+								<div class="maghny-gd-1">
+									{% if rooms %}
+							        {% for item in rooms %}
+									<div class="maghny-grid mb-3 dont-miss">
+										<a href="{% url 'room' item.id %}"><img class="img-fluid" src="{{item.roomimg.url}}" alt=""></a>
+									</div>
+									<h5><a href="{% url 'room' item.id %}">{{item.title}}</a></h5>
+									<br>
+									{% endfor %}
+									{% endif %}
+                                    
+								</div>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock content %}
