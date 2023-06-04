@@ -11,12 +11,11 @@ Blog
             <div class="w3breadcrumb-gids">
                 <div class="w3breadcrumb-left text-left">
                     <br><br>
-                    <h2 class="inner-w3-title mt-lg-5 mt-4">Blog</h2>
+                    <h4 class="inner-w3-title mt-lg-5 mt-4 text-center">{{post.title}}</h4>
                 </div>
                 <div class="w3breadcrumb-right">
                     <ul class="breadcrumbs-custom-path">
                         <li><a href="{% url 'blog' %}">Blog</a></li>
-                        <li class="active"><span class="fas fa-arrow-right mx-2"></span>{{post.title}}</li>
                     </ul>
                 </div>
             </div>
@@ -43,19 +42,22 @@ Blog
                      {% endif %}
 					
 			    </div>          
-				<div class="mag-content-right-hny col-lg-4">
+				<div class="mag-content-right-hny col-lg-4 mt-3">
 					<aside>
-						<div class="side-bar-hny-recent mb-5">
-							<h4 class="mag-side-title">Our <span>Rooms</span></h4>
+						<div class="side-bar-hny-recent mb-2">
+							<div style="background-color: #8b8b8b1f!important;" class="card-body mb-3">
+                                <h4 class=" text-center">OUR ROOMS</h4>
+                            </div>
 							<div class="mag-small-post dont-miss-grids-inf">
 								<div class="maghny-gd-1">
 									{% if rooms %}
 							        {% for item in rooms %}
-									<div class="maghny-grid mb-3 dont-miss">
-										<a href="{% url 'room' item.id %}"><img class="img-fluid" src="{{item.roomimg.url}}" alt=""></a>
-									</div>
-									<h5><a href="{% url 'room' item.id %}">{{item.title}}</a></h5>
-									<br>
+									<div  class="card mb-3 text-center">
+                                        <a href="{% url 'room' item.id %}"><img class="img-fluid" src="{{item.roomimg.url}}" alt=""></a>
+                                        <div style="background-color: #8b8b8b1f!important;" class="card-body">
+                                            <h4><a href="{% url 'room' item.id %}">{{item.title}}</a></h4>
+                                        </div>
+                                    </div>
 									{% endfor %}
 									{% endif %}
                                     

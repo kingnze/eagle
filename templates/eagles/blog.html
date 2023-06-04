@@ -11,7 +11,7 @@ Our Article
             <div class="w3breadcrumb-gids">
                 <div class="w3breadcrumb-left text-left">
                     <br><br>
-                    <h2 class="inner-w3-title mt-lg-5 mt-4">
+                    <h2 class="inner-w3-title mt-lg-5 mt-4 text-center">
                         Our Article </h2>
                 </div>
                 <div class="w3breadcrumb-right">
@@ -48,7 +48,7 @@ Our Article
                             
                             <a style="font-size: 1.6rem;  font-weight: 700;" href="{% url 'blogdetail' item.slug %}" class="blog-desc">{{ item.title | truncatechars:50 | safe }}</a>
                             <div class="author align-items-center">
-                                    <h5><span><i class="far fa-clock"></i> {{ item.date_posted }}</span></h5>
+                                    <h5><span><i class="far fa-clock"></i> {{ item.date_posted | timesince }} ago</span></h5>
                             </div>
                         </div>
                     </div>

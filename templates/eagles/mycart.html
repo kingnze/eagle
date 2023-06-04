@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+Shopping Cart
+{% endblock title %}
+{% block content %}
+<div class="inner-banner py-2">
+    <section class="w3l-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <div class="w3breadcrumb-left text-left">
+                </div>
+                <div class="w3breadcrumb-right mt-5 mb-3">
+                    <ul class="breadcrumbs-custom-path mt-5">
+                        <li><a href="{% url 'rooms' %}">Rooms</a></li>
+                        <li class="active"><span class="fa fa-hand-o-left hand-icon mx-2"></span>Shopping Cart</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+<br>
+
+<section  class="kinging-mag-main">
+    <br><br>
+	<div  class="mag-content-inf py-5">
+		<div class="container">
+			<div  class="blog-inner-grids py-md-4 row">	
+				<div class="mag-content-left-hny col-lg-8">
+                    <section id="product" class="py-4">
+                        <div style="padding-right: 4px; padding-left: 4px;" class="container p-0">
+                            <div class="row">
+                                <div class="col-md-8">
+                                <h4 class=" text-center mb-3">Shopping Cart</h4>
+                                <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Dellet</th>
+                                        <th >Room</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    
+                                    {% if cart %}
+                                    {% for item in cart.cartroom_set.all %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'manageCart' item.id %}?action=rmv "><i style="color: #07ad1a!important;" class="fa fa-trash"></i></a>
+                                        </td>
+                                        <td> 
+                                            <img src="{{ item.room.roomimg.url }}" width="100" alt="" class="img-fluid">
+                                        </td>
+                                        <td style="color: var(--heading-color);">{{item.room.title}}</td>
+                                        <td style="color: var(--heading-color);" >&#8358; {{item.rate | intcomma}}</td>
+                                       
+                                        <td style="color: var(--heading-color);"><strong> &#8358; {{item.subtotal | intcomma}}</strong></td>
+                                    </tr> 
+                                    {% endfor %}
+                                    <tr>
+                                        <td >
+                                            <a href="{% url 'manageCart' item.id %}?action=inc "><i style="color: #07ad1a!important;" class="fa fa-plus-circle"></i></a>
+                                            <span style="color: var(--heading-color);" class="border border-dark p-1 m-2">
+                                                {{item.quantity}} 
+                                            </span>
+                                            <a href="{% url 'manageCart' item.id %}?action=dcr "><i style="color: #07ad1a!important;" class="fa fa-minus-circle"></i></a>
+                                        </td> 
+                                        <th colspan="6">
+                                        <h2 style="color: white;">Total : &#8358; {{cart.total | intcomma}}</h2> 
+                                        </th>
+                                    </tr>
+                                    {% else %}
+                                        <tr>
+                                            <p class="lead bg-danger text-white p-3">No Item In Cart</p>
+                                        </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td colspan="2">
+                                        <div class="d-grid">
+                                            <a style="background-color: #07ad1a!important; color: white!important;" href="{% url 'rooms' %}" class="btn btn-outline-success">
+                                                Rooms
+                                            </a>
+                                        </div>
+                                        </td>
+                                        <td colspan="2">
+                                        <div class="d-grid">
+                                            {% if cart.cartroom_set.all %}
+                                            <a style="background-color: #07ad1a!important; color: white!important;" href="{% url 'emptyCart' %}" class="btn btn-outline-success">
+                                                Clear
+                                            </a>
+                                            {% else %}
+                                            <button style=" color: var(--heading-color)!important;" type="button" disabled class="btn btn-outline-success">
+                                                Clear
+                                            </button>
+                                            {% endif %}
+                                        </div>
+                                        </td>
+                                        <td colspan="3">
+                                        <div class="d-grid">
+                                            {% if cart.cartroom_set.all %}
+                                            <a style="background-color: #07ad1a!important; color: white!important;" href="{% url 'bookings' %}" class="btn btn-outline-success">
+                                                Proceed
+                                            </a>
+                                            {% else %}
+                                            <button style=" color: var(--heading-color)!important;" type="button" disabled class="btn btn-outline-success">
+                                                Proceed
+                                            </button>
+                                            
+                                            {% endif %}
+                                        </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                    
+                                <br>
+                        </div>
+                            </div>
+                        </div>  
+                    </section>   
+					
+			    </div>          
+				<div class="mag-content-right-hny col-lg-4">
+					<aside>
+						<div class="side-bar-hny-recent mb-5">
+							<h4 class="mag-side-title">Our <span>Rooms</span></h4>
+							<div class="mag-small-post dont-miss-grids-inf">
+								<div class="maghny-gd-1">
+									{% if rooms %}
+							        {% for item in rooms %}
+									<!-- <div class="maghny-grid mb-3 dont-miss">
+										<a href="{% url 'room' item.id %}"><img class="img-fluid" src="{{item.roomimg.url}}" alt=""></a>
+									</div> -->
+									<h5><a href="{% url 'room' item.id %}">{{item.title}}</a></h5>
+									<br>
+									{% endfor %}
+									{% endif %}
+                                    
+								</div>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- <section  class="w3l-text-11 py-0">
+    <div style="padding-left: 9px; padding-right: 8px;" class="container">
+        <div class="row">
+            <div class="col-lg-8 text11-content">
+               <section id="product" class="py-4">
+                    <div style="padding-right: 4px; padding-left: 4px;" class="container p-0">
+                        <div class="row">
+                            <div class=" col-md-9">
+                            <h4 class=" text-center mb-3">Shopping Cart</h4>
+                            <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Dellet</th>
+                                    <th >Room</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                
+                                {% if cart %}
+                                {% for item in cart.cartroom_set.all %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'manageCart' item.id %}?action=rmv "><i style="color: #07ad1a!important;" class="fa fa-trash"></i></a>
+                                    </td>
+                                    <td> 
+                                        <img src="{{ item.room.roomimg.url }}" width="100" alt="" class="img-fluid">
+                                    </td>
+                                    <td style="color: var(--heading-color);">{{item.room.title}}</td>
+                                    <td style="color: var(--heading-color);" >&#8358; {{item.rate | intcomma}}</td>
+                                   
+                                    <td style="color: var(--heading-color);"><strong> &#8358; {{item.subtotal | intcomma}}</strong></td>
+                                </tr> 
+                                {% endfor %}
+                                <tr>
+                                    <th colspan="6">
+                                    <h2 style="color: white;">Total : &#8358; {{cart.total | intcomma}}</h2> 
+                                    </th>
+                                </tr>
+                                {% else %}
+                                    <tr>
+                                        <p class="lead bg-danger text-white p-3">No Item In Cart</p>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td colspan="2">
+                                    <div class="d-grid">
+                                        <a style="background-color: #07ad1a!important; color: white!important;" href="{% url 'rooms' %}" class="btn btn-outline-success">
+                                            Rooms
+                                        </a>
+                                    </div>
+                                    </td>
+                                    <td colspan="2">
+                                    <div class="d-grid">
+                                        {% if cart.cartroom_set.all %}
+                                        <a style="background-color: #07ad1a!important; color: white!important;" href="{% url 'emptyCart' %}" class="btn btn-outline-success">
+                                            Clear
+                                        </a>
+                                        {% else %}
+                                        <button style=" color: var(--heading-color)!important;" type="button" disabled class="btn btn-outline-success">
+                                            Clear
+                                        </button>
+                                        {% endif %}
+                                    </div>
+                                    </td>
+                                    <td colspan="3">
+                                    <div class="d-grid">
+                                        {% if cart.cartroom_set.all %}
+                                        <a style="background-color: #07ad1a!important; color: white!important;" href="{% url 'bookings' %}" class="btn btn-outline-success">
+                                            Proceed
+                                        </a>
+                                        {% else %}
+                                        <button style=" color: var(--heading-color)!important;" type="button" disabled class="btn btn-outline-success">
+                                            Proceed
+                                        </button>
+                                        
+                                        {% endif %}
+                                    </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                
+                            <br>
+                    </div>
+                        </div>
+                    </div>  
+                </section>                 
+           </div>  
+         <div class="sidebar-side col-lg-4 mt-3 ">
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                <div class="sidebar-widget popular-posts">
+                    <div class="sidebar-title">
+                        <h4>Recent Products</h4>
+                    </div>
+                    {% if rooms %}
+                        {% for item in rooms %}
+                    <article class="post">
+                        
+                           <img src="{{item.roomimg.url}}" alt="">
+                        <div class="text">
+                            <a href="">{{ item.title }}</a>
+                            <div class="post-info">{{item.state}}</div>
+                        </div>
+                        
+                       
+                        
+                    </article> 
+              {% endfor %}                         
+                        {% endif %}
+                </div>
+            </aside>
+        </div>  
+                         
+        </div>
+    </div>
+  </section> -->
+{% endblock content %}

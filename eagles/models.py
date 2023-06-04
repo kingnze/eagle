@@ -1,12 +1,36 @@
+import secrets
 from django.db import models
 from datetime import datetime
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
+from .validators import Banner_v
+from . paystack import PayStack
+
+
+class Banner(models.Model):
+    title = models.CharField(max_length=500,null=True,blank=True)
+    body = RichTextField(null=True,blank=True)
+    video = models.FileField(validators=[Banner_v],null=True,blank=True)
+    button = models.CharField(max_length=100,null=True,blank=True)
+    published = models.BooleanField(default=True,null=True,blank=True)
+    
+    def __str__(self):
+        return self.title
+
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200, null =True,blank=True)
+    registered = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.full_name
 
 class Room(models.Model):
     title = models.CharField(max_length=100,blank=True,null=True)
-    price = models.CharField(max_length=100,blank=True,null=True)
+    price = models.PositiveIntegerField(null=True,blank=True)
+    discount_price = models.PositiveIntegerField(null=True,blank=True)
     guests = models.CharField(max_length=50,blank=True)
     bed = models.CharField(max_length=50,blank=True)
     car_rent = models.CharField(max_length=50,blank=True,null=True)
@@ -14,6 +38,7 @@ class Room(models.Model):
     roomimg1 = models.ImageField(blank=True)
     roomtmg2 = models.ImageField(blank=True)
     roomtmg3 = models.ImageField(blank=True)
+    view_count = models.PositiveIntegerField(default=0,blank=True,null=True)
     description = models.TextField(blank=True)
     isbooked = models.BooleanField(default=False)
 
@@ -25,6 +50,92 @@ class Room(models.Model):
         managed = True
         verbose_name = 'rooms'
         verbose_name_plural = 'rooms' 
+
+class Cart(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,null=True,blank=True)
+    total = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'cart ::: {str(self.id)}'
+
+class CartRoom(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE,null=True,blank=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    rate = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField()
+    subtotal = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'cart ::: {str(self.cart.id)} - cartroom ::: {str(self.id)}'
+
+OREDER_STATUS = (
+	('Booking Received','Booking Received'),
+	('Booking Processing','Booking Processing'),
+	('Booking Completed','Booking Completed'),
+	('Booking Canceled','Booking Canceled'),
+	)
+
+METHOD = (
+    ('Paystack','Paystack'),
+    ('Payment Transfer','Payment Transfer'),
+    ('Cash On Arrival','Cash On Arrival'),
+)
+
+class Bookings(models.Model):
+    cart = models.OneToOneField(Cart, on_delete=models.SET_NULL, null=True, blank=True)
+    booked_by =models.CharField(max_length=200)
+    check_in  = models.DateField()
+    check_out = models.DateField()
+    gender = models.CharField(max_length=50,null=True, blank=True)
+    address = models.CharField(max_length=500,null=True, blank=True)
+    adults = models.IntegerField()
+    children = models.IntegerField()
+    mobile = models.CharField(max_length=11)
+    email = models.EmailField(null=True,blank=True)
+    discount = models.PositiveIntegerField()
+    subtotal = models.PositiveIntegerField()
+    amount = models.PositiveIntegerField()
+    booking_status = models.CharField(max_length=200, choices=OREDER_STATUS)
+    booking_date = models.DateTimeField(auto_now_add=True)	
+    payment_method = models.CharField(max_length=20, choices=METHOD,default='Paystack')
+    payment_completed = models.BooleanField(default=False,null=True,blank=True)
+    ref = models.CharField(max_length=200,null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.booking_status} ::: {str(self.id)}'
+
+    def save(self, *args, **kwargs):
+        while not self.ref:
+            ref = secrets.token_urlsafe(50)
+            obj_with_sm_ref = Bookings.objects.filter(ref=ref)
+            if not obj_with_sm_ref:
+                self.ref= ref
+        super().save(*args, **kwargs)
+    
+    def amount_value(self) -> int:
+        return self.amount * 100
+
+    def verify_payment(self):
+        paystack = PayStack()
+        status, result = paystack.verify_payment(self.ref, self.amount)
+        if status:
+            if result['amount'] / 100 == self.amount:
+                self.payment_completed=True
+            self.save()
+        if self.order_status == 'Order Completed':
+            self.save()
+            self.cart.delete()
+        if self.payment_completed:
+            return True
+        return False
+
+    class Meta:
+            db_table = 'Bookings'
+            managed = True
+            verbose_name = 'Bookings'
+            verbose_name_plural = 'Bookings' 
 
 class Gallery(models.Model):
     imggallery = models.ImageField()
@@ -255,22 +366,4 @@ class Contact(models.Model):
         managed = True
         verbose_name = 'Contacts'
         verbose_name_plural = 'Contacts'         
-
-class Booking(models.Model):
-    room = models.CharField(max_length=200)
-    check_in  = models.DateField()
-    check_out = models.DateField()
-    gender = models.CharField(max_length=50,null=True, blank=True)
-    address = models.CharField(max_length=500,null=True, blank=True)
-    adults = models.IntegerField()
-    children = models.IntegerField()
-    request_date = models.DateTimeField(default=datetime.now, blank=True)
-    def __str__(self):
-        return f'{self.room} {self.check_in}'
-
-    class Meta:
-        db_table = 'Booking'
-        managed = True
-        verbose_name = 'Bookings'
-        verbose_name_plural = 'Bookings'         
 

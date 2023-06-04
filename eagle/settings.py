@@ -6,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-9$g2_qb9f*@_9q_6#u#by&i-_$@_0z0@*d3$n2#iuoe%dpfn@k'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['54.160.110.237','*','localhost']
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -19,7 +19,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'eagles.apps.EaglesConfig',
-    'login.apps.LoginConfig',
     'ckeditor',
     'django.contrib.humanize',
 ]
@@ -97,6 +96,9 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
+
+PAYSTACK_SECRET_KEY = 'sk_test_0317ba2742c61e1e8615e10d1243d11d408002ef'
+PAYSTACK_PUBLIC_KEY = 'pk_test_db7c20bff6d8de7179d30d40e76a36005dc8d605'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

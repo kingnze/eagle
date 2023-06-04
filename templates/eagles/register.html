@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} Register Account {% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="w3l-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+              <br><br>
+                <div class="w3breadcrumb-left text-left">
+                    <h2 class="inner-w3-title mt-lg-5 mt-4"></h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'rooms' %}">Register</a></li>
+                        <li class="active"><span class="fas fa-arrow-right mx-2"></span>Here</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+            
+            <div  class="row inner-sec">
+                <div style="width: 29rem; margin-bottom: 2rem; margin-top: 3rem; " class="login p-5 bg-light mx-auto mw-100">
+                    <h3 class="tittle mb-3">Register</h3>
+                    <form action="#" method="POST">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="oHlVjwyg5Q8IOopFlo3KW8NZZnqdevHjrnwuDwYvilyj1KhY7bkmcA80KRo7JcW3">  
+                        {% csrf_token %}
+                        <div class="form-group">
+                        <input style="font-size: 14px;" type="text" name="username" class="form-control" placeholder="Username" id="id_username" required="">
+                        </div>
+                        <div class="form-group">
+                        <input style="font-size: 14px;" type="text" name="full_name" class="form-control" placeholder="Full Name" id="id_full_name" required="">
+                        </div>
+                        <div class="form-group">
+                        <input style="font-size: 14px;" type="text" name="email" class="form-control" placeholder="Email address" required="">
+                        </div>
+                        <div class="form-group">
+                        <input style="font-size: 14px;" type="text" name="address" id="id_address" class="form-control"  placeholder="Address" required="">
+                        </div>
+                        <div class="form-group">
+                        <input style="font-size: 14px;" type="password" name="password1" id="id_password1" class="form-control" placeholder="Password" required="">
+                        </div>
+                        <div class="form-group">
+                        <input style="font-size: 14px;" type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm Password" required="">
+                        </div>
+                        <button style="font-size: 14px;" type="submit" class="btn btn-primary submit mb-2">Register</button>
+                        <p style="color: var(--heading-color)!important; font-size: 15px;">Already a user <a href="{% url 'login' %}{% if request.GET.next%}?next={{request.GET.next}}{% endif %}"> Login</a></p>
+                        <p>
+                            <a style="color: var(--heading-color)!important; font-size: 15px;" href="">By clicking Signup, I agree to your terms</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+    </div>
+</section>
+<br>
+{% endblock content %}

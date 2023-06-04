@@ -1,11 +1,7 @@
 from django.contrib import admin
-from .models import Blog,Room,Gallery,Dining,Spa,Meeting,Ourservice,Whoweare,Ourinfo,Ourservice1,Contact,About,Service,Comfort,Booking
-# Register your models here.
+from . models import *
 
-
-
-
-admin.site.register(Booking)
+admin.site.register(Banner) 
 admin.site.register(Room)
 admin.site.register(About)
 admin.site.register(Service)
@@ -20,3 +16,7 @@ admin.site.register(Ourinfo)
 admin.site.register(Ourservice1)
 admin.site.register(Contact)
 admin.site.register(Comfort)
+admin.site.register(Customer)
+admin.site.register(Cart)
+admin.site.register(CartRoom)
+admin.site.register(Bookings)

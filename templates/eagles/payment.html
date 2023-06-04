@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+Payment
+{% endblock title %}
+{% block content %}
+<div class="inner-banner">
+    <section class="w3l-breadcrumb text-left py-sm-5 "> 
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <div class="w3breadcrumb-left text-left">
+                </div>
+                <div class="w3breadcrumb-right mt-5 mb-3">
+                    <ul class="breadcrumbs-custom-path mt-5">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="active"><span class="fa fa-hand-o-left hand-icon mx-2"></span>Payment</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<section id="featured" class="py-4 my-3">
+      <div class="container">
+         <div class="row">
+             <div class="col-md-5 mx-auto">
+                <h3 class="text-center">Make Payment for:  &#8358; {{booking.amount | intcomma}}</h3>
+                <hr>
+                   <script src="https://js.paystack.co/v1/inline.js"></script> 
+                   <div class="d-grid">
+                       <button style="background-color: #ff7800!important;" type="submit" onclick="payWithPayStack()" class="btn btn-primary" id="paystackbtn">Make Payment</button>
+                   </div>
+             </div>
+         </div>
+      </div>
+</section>
+
+<script>
+      function payWithPayStack(){
+          let currency = 'NGN';
+          let plan ='';
+          let ref = '{{booking.ref}}'
+          let obj = {
+              key:"{{paystack_public_key}}",
+              email:'{{booking.email}}',
+              amount:'{{booking.amount_value}}',
+              ref:ref,
+              callback: function(response){
+                  window.location.href="{% url 'verify-payment' booking.ref %}";
+              }
+          }
+
+          if(Boolean(currency)){
+              obj.currency = currency.toUpperCase()
+            }
+          if(Boolean(plan)){
+            obj.plan = plan;
+          }
+          let handler = PaystackPop.setup(obj);
+          handler.openIframe();
+      }
+</script>
+{% endblock content %}

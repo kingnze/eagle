@@ -70,7 +70,6 @@
                     >
                         <a class="nav-link" href="{% url 'about' %}">About Us</a>
                     </li>
-
                     <li 
                     {% if 'contact' in request.path %}
                     class="nav-item active"
@@ -80,43 +79,29 @@
                     {% endif %}
                     >
                         <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <!-- <li 
-                    {% if 'dashboard' in request.path %}
+                    </li>                  
+                    <li 
+                    {% if 'profile' in request.path %}
                     class="nav-item active"
                     {% else %}
                     class="nav-item "
                       
                     {% endif %}
                     >
-                   <a class="nav-link" href="
-                   " ><i class="fas fa-user-shield"></i>  {{ user.username }}</a>
-                 </li> -->
-                 <li class="nav-item mr-3">
-                    <a href="javascript:{document.getElementById('logout').submit()}"
-                    class="nav-link">
-                    <i class="fa fa-sign-out"></i> Logout
-                   </a>
-                   <form action="{% url 'logout' %}" method="POST" id="logout">
-                     {% csrf_token %}
-                     <input type="hidden">
-                   </form>
-                  </li>
-                 {% else %}
-                 <li 
-                    {% if 'Login' in request.path %}
-                    class="nav-item active"
-                    {% else %}
-                    class="nav-item "
-                      
-                    {% endif %}
-                    >
-                   <a class="nav-link" href="{% url 'login' %}" ><i class="fas fa-user-shield"></i> Login</a> 
-                 </li>
-                 {% endif %}
+                           {% if request.user.is_authenticated %}
+                           <a  class="  nav-link" href="{% url 'profile' %}"><span style="font-size: 2rem;" class="fa fa-user" aria-hidden="true"></a>                                                  
+                    </li>	
+                    <li >
+                        <!-- <a  class="nav-link" href="{% url 'logoutuser' %}"> Logout</a> -->
+                        {% else %}
+                    </li>	
+                    <li >
+                        <a class=" nav-link" href="{% url 'login' %}">Login</a>
+                           {% endif %}
+                    </li>	
+
                 </ul>
-             
+               
             </div>
             <div class="mobile-position">
                 <nav class="navigation">

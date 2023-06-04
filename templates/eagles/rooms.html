@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block title %}
 Our Room
 {% endblock title %}
@@ -11,7 +12,7 @@ Our Room
             <div class="w3breadcrumb-gids">
                 <div class="w3breadcrumb-left text-left">
                     <br><br>
-                    <h2 class="inner-w3-title mt-lg-5 mt-4">Our Rooms</h2>
+                    <h2 class="inner-w3-title mt-lg-5 mt-4 text-center">Our Rooms</h2>
                 </div>
                 <div class="w3breadcrumb-right">
                     <ul class="breadcrumbs-custom-path">
@@ -38,14 +39,14 @@ Our Room
                 <div class="living_box "><a href="{% url 'room' item.id %}">
                 <img  src="{{item.roomimg.url}}" class="img-responsive " alt=""/>
                 <span class="sale-box">
-                    <span style="font-size: 1.5rem;" class="sale-label">{{ item.price}}</span>
+                    <span style="font-size: 1.5rem;" class="sale-label"> &#8358;{{ item.price | intcomma }}</span>
                     <!-- <span style="font-size: 1.5rem;" class="sale-label">{{ item.is_booked}}</span> -->
                 </span>
                 </a>
                 <div style="border-top: 4px solid #f35b04;" class="living_desc">
-                    <h3 style="color: var(--heading-color);" class="text-center"><a href="{% url 'room' item.id %}">{{ item.title}}</a></h3>
+                    <h3 class="text-center"><a href="{% url 'room' item.id %}">{{ item.title}}</a></h3>
                     <p style="color: var(--heading-color)!important;"  class="text-center">{{ item.description | truncatechars:35 | safe }}</p>
-                    <img class="text-center" style="margin-bottom: 15px; width: 8rem;     margin-left: 12rem;" src="{% static 'images/star2.png' %}" alt="">
+                    <img class="text-center" style="margin-bottom: 15px; width: 8rem;     margin-left: 15rem;" src="{% static 'images/star2.png' %}" alt="">
                 </div>
                 <table border="1" class="propertyDetails">
                 <tbody ><tr>

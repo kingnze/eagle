@@ -12,7 +12,7 @@
             <div class="w3breadcrumb-gids">
                 <div class="w3breadcrumb-left text-left">
                     <br><br>
-                    <h2 class="inner-w3-title mt-lg-5 mt-4">
+                    <h2 class="inner-w3-title mt-lg-5 mt-4 text-center">
                         {{ room.title}} </h2>
                 </div>
                 <div class="w3breadcrumb-right">
@@ -66,14 +66,14 @@
             <div class="col-md-5">
               <div class="col-md-12 mb-5">
                   <div class="py-3">
-                    <h4 style="font-size: 2.5rem;">{{room.title}}  {{ room.price | intcomma }}</h4>
+                    <h4 style="font-size: 2.5rem;">{{room.title}}  &#8358;{{ room.price | intcomma }}</h4>
                   </div>
                   <h4>Description:</h4>
                   <p class="py-3 " style="font-size: 16px; margin-top: -1rem;"  >{{ room.description}}</p>
                   <ul style="font-size: 14px; background-color: var(--bg-color);"  class="list-group list-group-flush mb-4">
                     <li style=" background-color: var(--bg-color); color: var(--heading-color);" class="list-group-item ">
                         <i class="fa fa-user" style="color: var(--heading-color); font-size: large;"></i> Price:
-                        <span class="float-right" >{{ room.price | intcomma }}</span>
+                        <span class="float-right" >&#8358;{{ room.price | intcomma }}</span>
                     </li>
                     <li style=" background-color: var(--bg-color); color: var(--heading-color);" class="list-group-item ">
                         <i class="fa fa-users" style="color: var(--heading-color); font-size: large;" ></i> Guests:
@@ -86,16 +86,20 @@
                     <li style=" background-color: var(--bg-color); color: var(--heading-color);" class="list-group-item ">
                         <i class="fa fa-car" style="color: var(--heading-color); font-size: large;"></i> Car Rental:
                         <span class="float-right">{{ room.car_rent}}</span>
-                    </li>                                       
+                    </li> 
+                     
+                    <li style=" background-color: var(--bg-color); color: var(--heading-color);" class="list-group-item ">
+                        <span>Views <i class="fa fa-eye"></i> : {{room.view_count}}</span>
+                      </li>                                      
                 </ul>
                 <ul class="header-search me-lg-4">
                     <li class="nav-item search-right">
                         <!-- <button type="submit" class="btn btn-primary btn-style w-60" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button> -->
-                        <a href="{% url 'bookings' %}" class="btn search-btn btn-primary" title="search"><span aria-hidden="true"></span> Book Now</a>
+                        <a href="{% url 'addtocart' room.id  %}" class="btn search-btn btn-primary" title="search"><span aria-hidden="true"></span> Book Now</a>
                         <!-- <a href="#search" class="btn search-btn btn-primary" title="search"><span aria-hidden="true"></span> Book Now</a> -->
                     </li>                                       
                 </ul>        
-                        {% endif %}
+                {% endif %}
         </div>
     </div>
   </section>

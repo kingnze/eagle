@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %} Account Login {% endblock title %}
+
+{% block content %}
+<div class="inner-banner py-5">
+    <section class="kinging-breadcrumb text-left py-sm-5 ">
+        <div class="container">
+            <div class="w3breadcrumb-gids">
+                <br><br>
+                <div class="w3breadcrumb-left text-left">
+                    <h2 class="inner-w3-title mt-lg-5 mt-4 text-center">Login Here</h2>
+                </div>
+                <div class="w3breadcrumb-right">
+                    <ul class="breadcrumbs-custom-path">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+<section  class="main-content-w3layouts-agileits">
+    <div style="color: var(--heading-color); background-color: var(--bg-color);" class="container">
+        
+        <div  class="row inner-sec">
+            <div style="width: 29rem; margin-bottom: 2rem; margin-top: 3rem; " class="login p-5 bg-light mx-auto mw-50">
+     
+                <h3 class="tittle mb-3">Sign In </h3>
+                <form  action="#" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <input style="font-size: 14px;" type="text" name="uname" class="form-control" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                    <input style="font-size: 14px;" type="password" name="pwd" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                    
+                </div>
+                    <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label style="font-size: 13px;"  class="form-check-label" for="exampleCheck1">Remember Me</label>
+                    </div>
+                    <button style="font-size: 14px;" type="submit" value="Login" class="btn btn-primary submit mb-4">Sign In</button>
+                    <p style="color: var(--heading-color)!important; font-size: 15px;" >Don't have an account <a href="{% url 'register' %}{% if request.GET.next%}?next={{request.GET.next}}{% endif %}"> Register</a></p>
+            
+                </form>
+            </div>    
+        </div>
+    </div>
+</section>
+<br>
+{% endblock content %}

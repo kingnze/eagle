@@ -1,22 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block title %}
-Booking
+Items In Cart
 {% endblock title %}
-
 {% block content %}
-<div class="inner-banner py-5">
+<div class="inner-banner">
     <section class="w3l-breadcrumb text-left py-sm-5 ">
         <div class="container">
             <div class="w3breadcrumb-gids">
                 <div class="w3breadcrumb-left text-left">
-                    <br><br>
-                    <h2 class="inner-w3-title mt-lg-5 mt-4">
-                        Booking </h2>
                 </div>
-                <div class="w3breadcrumb-right">
-                    <ul class="breadcrumbs-custom-path">
-                        <li><a href="{% url 'index' %}">Home</a></li>
+                <div class="w3breadcrumb-right mt-5 mb-3" >
+                    <ul class="breadcrumbs-custom-path mt-5">
+                        <li><a href="{% url 'myCart' %}">My Cart</a></li>
+                        <li class="active"><span class="fa fa-hand-o-left hand-icon mx-2"></span>Items In Cart </li>
                     </ul>
                 </div>
             </div>
@@ -24,85 +22,183 @@ Booking
         </div>
     </section>
 </div>
-<section class="main-content-w3layouts-agileits">
-    <div class="container">
-        <div  class="row inner-sec">
-            <div style="width: 54rem; margin-bottom: 2rem; margin-top: 3rem; " class="login p-5 bg-light mx-auto mw-100">
-                <h5 style="font-size: 3rem; font-family: geneva; font-weight: 700; text-align: center;">Book A Room Today</h5>
-                {% if messages %}
-                {% for item in messages %}
-                <p class="alert alert-success"> {{item}} </p>
-                {% endfor %}
-                {% endif %}
-                <form action="{% url 'bookings' %}" method="POST" class="search-box  position-relative">
-                    {% csrf_token %}
-                    {% if user.is_authenticated %}
-                        <input type="hidden" name="user_id" value="{{ user.id }}"> 
-                    {% else %}
-                        <input type="hidden" name="user_id" value="0">
-                    {% endif %}
-                    <br>
-                    <div class="form-row" style="justify-content: center;">
-                    <div class="col-md-6 mb-3">
-                            <label  for="checkin">Check In</label>
-                            <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px;  border-radius: 5px; font-size: 17px;" type="date" name="check_in" class="form-control" placeholder="Check In" required>
-                        </div>
-                        <div  class="col-md-6 mb-3">
-                        <label  for="checkout">Check Out</label>
-                        <input style="background-color: var(--bg-color); color: var(--heading-color);  height: 50px;  border-radius: 5px; font-size: 17px;" type="date" name="check_out" class="form-control" placeholder="Check In" required>
-                        </div>
-                    </div>
-                  
-                    <div class="form-row" style="justify-content: center;">
-                    <div class="col-md-6 mb-3 ">
-                        <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px;  border-radius: 5px; font-size: 17px;" type="number" name="adults" class="form-control"  value="" placeholder="Adults" required>
-                    </div>
-                    <div class="col-md-6 mb-3 ">
-                        <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px;  border-radius: 5px; font-size: 17px;"  type="number" name="children" class="form-control"  value="" placeholder="children" required>
-                    </div>
-                    </div> 
-                    <div class="form-row" style="justify-content: center;">
-                        <div class="col-md-6 mb-3 ">
-                            <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px; border-radius: 5px; font-size: 17px;" type="text" name="name" placeholder="Name" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} class="form-control" required>
-                        </div>
-                        <div class="col-md-6 mb-3 ">
-                            <input style="background-color: var(--bg-color); color: var(--heading-color); height: 50px;  border-radius: 5px; font-size: 17px;"  type="text" name="address" class="form-control"  value="" placeholder="Address" required>
-                        </div>
-                    </div>
-                    <div class="form-row" style="justify-content: center;">
-                        <div  class=" col-md-6 mb-3">
-                            <select class="form-row" style="background-color: var(--bg-color); padding-left: 10px; height: 50px; width: 230px; border: 1px solid #ccc; color: var(--heading-color); border-radius: 5px; font-size: 17px;"  name="gender" aria-placeholder="Gender" required>
-                                <option style="color: var(--heading-color);" selected disabled value=""> Gender</option>
-                                <option style="color: var(--heading-color);" value="female"> Female</option>
-                                <option style="color: var(--heading-color);" value="male"> Male</option>
-                            </select>
-                        </div>
-                        </div>            
-                    <div class="form-row" style="justify-content: center;">
-                        <div  class=" col-md-6 mb-3 col-sm-6 ">
-                            <select  style="background-color: var(--bg-color); color: var(--heading-color); padding-left: 10px; height: 50px; width: 230px; border: 1px solid #ccc; border-radius: 5px; font-size: 17px;"  name="room" aria-placeholder="Room" required>
-                                <option id="sele" style="margin-left: 5px; color: var(--heading-color); " selected disabled value=""> Select a room</option>
-                                <option style="color: var(--heading-color);" name="room"> Twin Club Room</option>
-                                <option style="color: var(--heading-color);"  name="room"> Twin Superior Room</option>
-                                <option style="color: var(--heading-color);"  name="room">Junior Club Suite</option>
-                                <option style="color: var(--heading-color);"  name="room">King Club Room</option>
-                                <option style="color: var(--heading-color);"  name="room">One Bedroom Executive Suite</option>
-                                <option style="color: var(--heading-color);"  name="room">Eagles Suite</option>
-                                <option style="color: var(--heading-color);"  name="room">King Executive Room</option>
-                                <option style="color: var(--heading-color);"  name="room">Ambassador Suite</option>
-                                <option style="color: var(--heading-color);"  name="room">Presidential Suite</option>
-                            </select>
-                        </div>
-                    </div>
+<section  class="kinging-mag-main">
+    <br><br>
+	<div  class="mag-content-inf py-5">
+		<div  class="container">
+			<div  class="blog-inner-grids py-md-4 row">	
+				<div class="mag-content-left-hny col-lg-9">
+                    <section  >
+                        <div style="padding-left: 0px; padding-right: 0px;" class="container">
+                    
+                            <div class="row">                    
+                                <div  class="col-md-5 mb-4">
+                                    <div style="padding-left: 0px; padding-right: 0px;" class="card ">
+                                        <h4 class=" text-center mt-4 mb-2">Booking Detail</h4>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="color: var(--heading-color);">Delet</th>
+                                                    <th style="color: var(--heading-color);">Room</th>
+                                                    <!-- <th style="color: var(--heading-color);">Name</th> -->
+                                                    <th style="color: var(--heading-color);">Days</th>
+                                                    <th style="color: var(--heading-color);">Price</th>
 
-                    <div  class="bottom-btn col-md-6 mb-3 col-sm-6 ">
-                        <button style=" height: 49px; border-radius: 5px; font-size: 17px;" class="btn btn-style btn-primary w-100 px-2">Book</button>
-                    </div>
-                </form>    
-            </div>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                    
+                                                {% if cart %}
+                                                  {% for item in cart.cartroom_set.all %}
+                                                  <tr>
+                                                    <td>
+                                                        <a href="{% url 'manageCart' item.id %}?action=rmv "><i style="color: #ff7800!important;" class="fa fa-trash"></i></a>
+                                                    </td>
+                                                    <!-- <td> 
+                                                        <img src="{{ item.room.roomimg.url }}" width="100" alt="" class="img-fluid">
+                                                    </td> -->
+                                                    <td style="color: var(--heading-color);">{{item.room.title}}</td>
+                                                    
+                                                    <td  >
+                                                        <a href="{% url 'manageCart' item.id %}?action=dcr "><i style="color: #ff7800!important;" class="fa fa-minus-circle"></i></a>
+                                                        <span class="border border-dark p-2 m-1 ">
+                                                            {{item.quantity}} 
+                                                        </span>
+                                                        <a href="{% url 'manageCart' item.id %}?action=inc "><i style="color: #ff7800!important;" class="fa fa-plus-circle"></i></a>
+                                                    </td>
+                                                    <td style="color: var(--heading-color);"><strong> &#8358; {{item.rate | intcomma}}</strong></td>
+                                                  </tr>
+                                                 
+                                                  {% endfor %}
+                                                  <tr>
+                                                    <th colspan="6">
+                                                       <h4 style="color: var(--heading-color);">Total : &#8358; {{cart.total | intcomma}}</h4> 
+                                                    </th>
+                                                  </tr>
+                                                {% else %}
+                                                    <tr>
+                                                        <p class="lead bg-danger text-white p-3">No Item In Cart</p>
+                                                    </tr>
+                                                {% endif %}
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div class="d-grid mb-3">
+                                                            <a style="background-color: #ff7800; color: white!important;" href="{% url 'rooms' %}" class="btn btn-outline-success">
+                                                            Back to Rooms
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                 
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card p-3">
+                                        <h4 class=" text-center mb-3 mt-2">Booking Information</h4>
+                                        <form style="color: var(--heading-color);" action="" method="POST">
+                                            {% csrf_token %}
+                                        <input type="hidden" value="vAqJENxUv2iRNElDJKf1KSyvJAvvnkbf0cIz9DxpQBe32hRl2IQbt11t2flBCMYm">
+                                        
+                                       <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <p>
+                                                <label style="font-size: 14px;" for="checkin">Check In</label>
+                                                <input type="date" name="check_in" class="form-control " placeholder="Check In" required="">
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <p>
+                                                <label style="font-size: 14px;"  for="checkout">Check Out</label>
+                                                <input type="date" name="check_out" class="form-control " placeholder="Check In" required="">
+                                               </p> 
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <p>
+                                                <input type="number" name="adults" class="form-control mb-3" value="" placeholder="Adults" required="">
 
-           </div>
-    </div>
-</div>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <p>
+                                                <input type="number" name="children" class="form-control  " value="" placeholder="children" required="">
+
+                                               </p> 
+                                        </div>
+                                       
+                                            <p style="padding-left: 1.5rem; padding-right: 1.5rem;">
+                                                <select class="form-control mb-3" name="gender" aria-placeholder="Gender" required="">
+                                                    <option style="color: var(--heading-color);" selected="" disabled="" value=""> Gender</option>
+                                                    <option style="color: var(--heading-color);" value="female"> Female</option>
+                                                    <option style="color: var(--heading-color);" value="male"> Male</option>
+                                                </select> 
+                                            </p>
+                                        <p style="padding-left: 1.5rem; padding-right: 1.5rem;">          
+                                        <input type="text" name="booked_by" class="form-control mb-3" placeholder="Full name" maxlength="200" required="" id="id_booked_by">
+                                        </p>
+                                        <p style="padding-left: 1.5rem; padding-right: 1.5rem;">
+                                        <input type="text" name="address" class="form-control mb-3" placeholder="Delivery address" maxlength="200" required="" id="id_address">
+                                        </p>
+                                        <p style="padding-left: 1.5rem; padding-right: 1.5rem; color: var(--heading-color)!important;">
+                                        <input  type="text" name="mobile" class="form-control mb-3" placeholder="Mobile number" maxlength="11" required="" id="id_mobile">
+                                        </p>
+                                        <p style="padding-left: 1.5rem; padding-right: 1.5rem;">
+                                        <input type="text" name="email" class="form-control mb-1" placeholder="Email id" maxlength="254" id="id_email">
+                                        </p>
+                                        
+                                        <p id="checkout" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+                                        <label style="color: var(--heading-color); font-size: 16px;
+                                        " for="id_payment_method">Payment method<span class="fa fa-hand-o-right hand-icon mx-2"></span></label>
+                                        <select class="text-center" style="height: 3rem;" name="payment_method" id="id_payment_method">
+                                        <option value="Paystack" selected="">Paystack</option>
+                                        <option value="Payment Transfer">Payment Transfer</option>
+                                        <option value="Cash On Arrival">Cash On Delivery</option>
+                                        </select>
+                                        </p>
+                                            <div class="d-grid mt-3">
+                                                <button style="background-color: #ff7800; color: white; " type="submit" class="btn btn-info">Book Now</button>
+                                            </div>
+                                       </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+					
+			    </div>          
+				<div class="mag-content-right-hny col-lg-3">
+					<aside>
+						<div class="side-bar-hny-recent mb-2">
+							<div style="background-color: #8b8b8b1f!important;" class="card-body mb-3">
+                                <h4 class=" text-center">OUR ROOMS</h4>
+                            </div>
+							<div class="mag-small-post dont-miss-grids-inf">
+								<div class="maghny-gd-1">
+									{% if rooms %}
+							        {% for item in rooms %}
+									<div class="card mb-2">
+                                        <!-- <a href="{% url 'room' item.id %}"><img class="img-fluid" src="{{item.roomimg.url}}" alt=""></a> -->
+                                        <div style="background-color: #8b8b8b1f!important;" class="card-body">
+                                            <h4><a href="{% url 'room' item.id %}">{{item.title}}</a></h4>
+                                        </div>
+                                    </div>
+									{% endfor %}
+									{% endif %}
+                                    
+								</div>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
+
 {% endblock content %}
+
+
+
